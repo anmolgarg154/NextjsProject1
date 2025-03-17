@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 
 export default function Profile(){
+    
     const router = useRouter()
     const logout = async ()=>{
             try {

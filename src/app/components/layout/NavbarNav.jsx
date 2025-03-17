@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
@@ -22,11 +23,20 @@ const NavbarItem = () => {
         { label: "Bookings", to: "/Bookings" },
         { label: "Our Team", to: "/team" },
         { label: "Contact Us", to: "/contactUs" }
-    ];
 
-    const handleLogout = () => {
-        setisLogin("N");
-    };
+    ]
+   
+    const logout = async ()=>{
+                try {
+                   await axios.get("/api/user/logout")
+                   router.push("/login")
+    
+                } catch (error) {
+                    console.log("Error",error.message)
+                }
+        }
+
+        
 
     useEffect(() => {
         const handleScroll = () => {
@@ -90,7 +100,7 @@ const NavbarItem = () => {
                                 />
                             </Link>
                             <button
-                                onClick={handleLogout}
+                                onClick={logout}
                                 className="bg-white text-black px-6 py-2 rounded-lg transition-all duration-300 hover:bg-black hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                             >
                                 Logout
